@@ -18,12 +18,12 @@ public class User implements Serializable {
     private String email;
     private String name;
     private BigDecimal balance;
-    // Add the list of trades
-    private ArrayList<Trade> tradeHistory;
+    // Add the list of trades ID
+    private ArrayList<String> tradeHistory;
 
     public User(){
         balance = new BigDecimal("1000000");
-        tradeHistory = new ArrayList<Trade>();
+        tradeHistory = new ArrayList<String>();
     }
     public User(Integer id, String password, String email, String name){
         this.id = id;
@@ -31,14 +31,17 @@ public class User implements Serializable {
         this.email = email;
         this.name = name;
         this.balance = new BigDecimal("1000000");
-        this.tradeHistory = new ArrayList<Trade>();
+        this.tradeHistory = new ArrayList<String>();
     }
 
-    public ArrayList<Trade> getTradeHistory(){
+    public ArrayList<String> getTradeHistory(){
         return tradeHistory;
     }
-    public void setTradeHistory(ArrayList<Trade> tradeHistory){
+    public void setTradeHistory(ArrayList<String> tradeHistory){
         this.tradeHistory = tradeHistory;
+    }
+    public void addTradeHistory(String tradeId){
+        this.tradeHistory.append(tradeId);
     }
 
     public BigDecimal getBalance() {

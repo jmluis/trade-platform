@@ -90,13 +90,14 @@ public class UserController {
 		logger.debug("UserController.decreaseBalance: id='" + userId + "', amount='" + amount + "'");
 
 		User userResponse = this.service.findAccount(userId);
-		//Trade currTrade = TradeService.getTradeById(tradeId);
 
 		BigDecimal currentBalance = userResponse.getBalance();
-
 		BigDecimal newBalance = currentBalance.subtract(new BigDecimal(amount));
+		
+
 
 		if (newBalance.compareTo(BigDecimal.ZERO) >= 0) {
+			userResponse.addTradeHistory(tradeId);
 			userResponse.setBalance(newBalance);
 			this.service.saveUser(userResponse);
 			return new ResponseEntity<Double>(userResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.OK);
@@ -120,14 +121,14 @@ public class UserController {
 	 *            The amount to increase the balance by.
 	 * @return The new balance of the account with HTTP OK.
 	 */
-	@RequestMapping(value = "/accounts/{userId}/increaseBalance/{amount}", method = RequestMethod.GET)
-	public ResponseEntity<Double> increaseBalance(@PathVariable("userId") final String userId, @PathVariable("amount") final double amount) {
+	@RequestMapping(value = "/accounts/{userId}/increaseBalance/{amount}/trade/{tradeId}", method = RequestMethod.GET)
+	public ResponseEntity<Double> increaseBalance(@PathVariable("userId") final String userId, @PathVariable("amount") final double amount, @PathVariable("tradeId") final String tradeId) {
 
 		logger.debug("UserController.increaseBalance: id='" + userId + "', amount='" + amount + "'");
 
-		User accountResponse = this.service.findAccount(userId);
+		User userResponse = this.service.findAccount(userId);
 
-		BigDecimal currentBalance = accountResponse.getBalance();
+		BigDecimal currentBalance = userResponse.getBalance();
 
 		logger.debug("UserController.increaseBalance: current balance='" + currentBalance + "'.");
 
@@ -136,14 +137,15 @@ public class UserController {
 			BigDecimal newBalance = currentBalance.add(new BigDecimal(amount));
 			logger.debug("UserController.increaseBalance: new balance='" + newBalance + "'.");
 
-			accountResponse.setBalance(newBalance);
+			userResponse.setBalance(newBalance);
+			userResponse.addTradeHistory(tradeId);
 			this.service.saveUser(accountResponse);
-			return new ResponseEntity<Double>(accountResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.OK);
+			return new ResponseEntity<Double>(userResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.OK);
 
 		} else {
 			// amount can not be negative for increaseBalance, please use
 			// decreaseBalance
-			return new ResponseEntity<Double>(accountResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<Double>(userResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.EXPECTATION_FAILED);
 		}
 
 	}
