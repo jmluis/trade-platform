@@ -1,0 +1,8 @@
+<h2>Stock Details</h2>
+
+<div *ngIf="stock">
+  <h3>{{ stock.name }}</h3>
+  <h4>{{ stock.price | currency }}</h4>
+  <p>{{ stock.description }}</p>
+
+</div>
