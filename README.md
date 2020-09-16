@@ -32,7 +32,12 @@ This is a spring boot application that is responsible for handling trades. This 
 
 **Users** get the most up to date stock price from **Stock**, and send actions to **Trade**. 
 
-It is also where filling of the orders happens. A trade can have four status: **Created, Processing, Filled, or Rejected. 
+It is also where filling of the orders happens. A trade can have four status: **Created, Processing, Filled, or Rejected **. 
 
 
-## 4. Web Microservice
+## 4. Web Microservice -- Angular
+This is a User Interface for the  Spring Boot REST API for Trade Services.
+
+This UI allows users to create new accounts, place trades, and evaluate user portfolios. 
+
+
