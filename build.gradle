@@ -1,0 +1,26 @@
+allprojects {
+    group = 'com.conygre.spring'
+    version = '0.0.1-SNAPSHOT'
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+}
+
+project(':User') {
+    dependencies {
+        compile project(':Trade')
+    }
+}
+
+task explodedDist(type: Copy) {
+    into "$buildDir/explodedDist"
+    subprojects {
+        from tasks.withType(War)
+    }
+}

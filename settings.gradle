@@ -1,0 +1,7 @@
+rootProject.name = 'Trade Platform'
+include "Stock", "Trade", "User", "Eureka", "Gateway"
+
+project(":Trade").projectDir = file("TradeExchange")
+rootProject.children.each { subproject -> 
+     subproject.buildFileName = "${subproject.name}.gradle" 
+}

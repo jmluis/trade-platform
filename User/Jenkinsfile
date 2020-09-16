@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+ 
+  stages {
+    stage('Clean gradle') {
+      sh 'chmod a+x gradlew'
+    }
+
+    stage('Build') {
+      steps {
+        sh './gradlew build'
+      }
+    }
+    
+    stage('Test') {
+      steps {
+        sh './gradlew test'
+      }
+    }
+
+    stage('Build Container') {
+      steps {
+        sh "docker build -t user-service:0.0.${currentBuild.number} ."
+      }
+    }
+  }
+}
