@@ -1,0 +1,29 @@
+<form>
+    <h1>is this where we want to be?</h1>
+    <div class="form-group form-inline">Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="tradeService.searchTerm" /><span class="ml-3" *ngIf="tradeService.loading$ | async">Loading...</span></div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>ticker</span><sb-sort-icon *ngIf='sortedColumn === "stockTicker"'></sb-sort-icon></th>
+                <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>price</span><sb-sort-icon *ngIf='sortedColumn === "price"'></sb-sort-icon></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let trade of trades$ | async">
+                <th scope="row">{{ trade.id }}</th>
+                <td><img class="mr-2" [src]="'https://upload.wikimedia.org/wikipedia/commons/' + trade.flag" style="width: 20px;" /><ngb-highlight [result]="trade.name" [term]="tradeService.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="trade.name" [term]="tradeService.searchTerm"></ngb-highlight></td>
+                <td><ngb-highlight [result]="trade.price | number" [term]="tradeService.searchTerm"></ngb-highlight></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="total$ | async" [(page)]="tradeService.page" [pageSize]="tradeService.pageSize"></ngb-pagination
+        ><select class="custom-select" style="width: auto;" name="pageSize" [(ngModel)]="tradeService.pageSize"
+            ><option [ngValue]="2">2 items per page</option
+            ><option [ngValue]="4">4 items per page</option
+            ><option [ngValue]="6">6 items per page</option></select
+        >
+    </div>
+</form>
