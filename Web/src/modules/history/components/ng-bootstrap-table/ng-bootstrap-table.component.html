@@ -1,19 +1,18 @@
 <form>
     <h1>Trade History</h1>
-    <div class="form-group form-inline">Trade Lookup: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="tradeService.searchTerm" /><span class="ml-3" *ngIf="tradeService.loading$ | async">Loading...</span></div>
+    <div class="form-group form-inline">Trade Lookup: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="tradeService.searchTerm" /><span class="ml-3" *ngIf="tradeService.loading$ | async"></span></div>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Trade ID</th>
     
-                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Ticker</span><sb-sort-icon *ngIf='sortedColumn === "stockTicker"'></sb-sort-icon></th>
-                <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>Price</span><sb-sort-icon *ngIf='sortedColumn === "price"'></sb-sort-icon></th>
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Ticker</span></th>
+                <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>Price</span></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let trade of trades$ | async">
                 <th scope="row">{{ trade.id }}</th>
-                <td><img class="mr-2" [src]="'https://upload.wikimedia.org/wikipedia/commons/' + trade.flag" style="width: 20px;" /><ngb-highlight [result]="trade.name" [term]="tradeService.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="trade.name" [term]="tradeService.searchTerm"></ngb-highlight></td>
                 <td><ngb-highlight [result]="trade.price | number" [term]="tradeService.searchTerm"></ngb-highlight></td>
             </tr>

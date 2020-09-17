@@ -4,9 +4,9 @@ form
         input.form-control.ml-2(
             type='text',
             name='searchTerm',
-            [(ngModel)]='countryService.searchTerm'
+            [(ngModel)]='tradeService.searchTerm'
         )
-        span.ml-3(*ngIf='countryService.loading$ | async') Loading...
+        span.ml-3(*ngIf='tradeService.loading$ | async')
     table.table.table-striped
         thead
             tr
@@ -16,31 +16,22 @@ form
                     sbSortable='name',
                     (sort)='onSort($event)'
                 ) 
-                    span Country
-                    sb-sort-icon(
-                        *ngIf='sortedColumn === "name"',
-                        [direction]='sortedDirection'
-                    )
+                    span Trade ID
+
                 th(
                     scope='col',
                     sbSortable='area',
                     (sort)='onSort($event)'
                 ) 
-                    span Area
-                    sb-sort-icon(
-                        *ngIf='sortedColumn === "area"',
-                        [direction]='sortedDirection'
-                    )
+                    span Ticker
+
                 th(
                     scope='col',
                     sbSortable='population',
                     (sort)='onSort($event)'
                 ) 
-                    span Population
-                    sb-sort-icon(
-                        *ngIf='sortedColumn === "population"',
-                        [direction]='sortedDirection'
-                    )
+                    span Price
+
         tbody
             tr(*ngFor='let country of countries$ | async')
                 th(scope='row') {{ country.id }}

@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core
 })
 export class DashboardCardsComponent implements OnInit {
     @Input() stock!: string;
-    
+
     constructor() {}
     ngOnInit() {}
 }
