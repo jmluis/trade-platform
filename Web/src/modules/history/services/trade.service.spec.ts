@@ -1,16 +1,23 @@
 /* tslint:disable:no-unused-variable */
+import { DecimalPipe } from '@angular/common';
+import { TestBed } from '@angular/core/testing';
 
-import { TestBed, async, inject } from '@angular/core/testing';
 import { TradeService } from './trade.service';
 
-describe('Service: Trade', () => {
+describe('TradeService', () => {
+  let tradeService: TradeService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TradeService]
+        providers: [TradeService, DecimalPipe],
     });
-  });
+    tradeService = TestBed.inject(TradeService);
+});
 
-  it('should ...', inject([TradeService], (service: TradeService) => {
-    expect(service).toBeTruthy();
-  }));
+  describe('trades$', () => {
+    it('should return Observable<Trade[]>', () => {
+        tradeService.trades().subscribe((response: any) => {
+          expect(response).toBeDefined();
+        });
+    });
+});
 });

@@ -1,12 +1,59 @@
+//- form
+//-     .form-group.form-inline
+//-         | Full text search: 
+//-         input.form-control.ml-2(
+//-             type='text',
+//-             name='searchTerm',
+//-             [(ngModel)]='tradeService.searchTerm'
+//-         )
+//-         span.ml-3(*ngIf='tradeService.loading$ | async')
+//-     table.table.table-striped
+//-         thead
+//-             tr
+//-                 th(scope='col') #
+//-                 th(
+//-                     scope='col',
+//-                     sbSortable='name',
+//-                     (sort)='onSort($event)'
+//-                 ) 
+//-                     span Trade ID
+
+//-                 th(
+//-                     scope='col',
+//-                     sbSortable='area',
+//-                     (sort)='onSort($event)'
+//-                 ) 
+//-                     span Ticker
+
+//-                 th(
+//-                     scope='col',
+//-                     sbSortable='population',
+//-                     (sort)='onSort($event)'
+//-                 ) 
+//-                     span Price
+
+//-     .d-flex.justify-content-between.p-2
+//-         ngb-pagination(
+//-             [collectionSize]='total$ | async',
+//-             [(page)]='tradeService.page',
+//-             [pageSize]='tradeService.pageSize'
+//-         )
+
+//-         select.custom-select(
+//-             style='width: auto',
+//-             name='pageSize',
+//-             [(ngModel)]='tradeService.pageSize'
+
+
 form
     .form-group.form-inline
         | Full text search: 
         input.form-control.ml-2(
             type='text',
             name='searchTerm',
-            [(ngModel)]='tradeService.searchTerm'
+            [(ngModel)]='countryService.searchTerm'
         )
-        span.ml-3(*ngIf='tradeService.loading$ | async')
+        span.ml-3(*ngIf='countryService.loading$ | async') Loading...
     table.table.table-striped
         thead
             tr
@@ -16,22 +63,31 @@ form
                     sbSortable='name',
                     (sort)='onSort($event)'
                 ) 
-                    span Trade ID
-
+                    span Country
+                    sb-sort-icon(
+                        *ngIf='sortedColumn === "name"',
+                        [direction]='sortedDirection'
+                    )
                 th(
                     scope='col',
                     sbSortable='area',
                     (sort)='onSort($event)'
                 ) 
-                    span Ticker
-
+                    span Area
+                    sb-sort-icon(
+                        *ngIf='sortedColumn === "area"',
+                        [direction]='sortedDirection'
+                    )
                 th(
                     scope='col',
                     sbSortable='population',
                     (sort)='onSort($event)'
                 ) 
-                    span Price
-
+                    span Population
+                    sb-sort-icon(
+                        *ngIf='sortedColumn === "population"',
+                        [direction]='sortedDirection'
+                    )
         tbody
             tr(*ngFor='let country of countries$ | async')
                 th(scope='row') {{ country.id }}

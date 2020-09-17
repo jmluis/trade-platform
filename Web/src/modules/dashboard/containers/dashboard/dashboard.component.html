@@ -1,10 +1,14 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false"></sb-dashboard-head>
+    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="true"></sb-dashboard-head>
 
     <div *ngIf="this.getObservableStock() | async as _stock">
         <sb-dashboard-cards [stock]="_stock"></sb-dashboard-cards>
         <sb-dashboard-charts [stock]="_stock"></sb-dashboard-charts>
         <sb-dashboard-history></sb-dashboard-history>
     </div>
+
+        <sb-dashboard-charts [stock]="_stock"></sb-dashboard-charts>
+        <sb-dashboard-history></sb-dashboard-history>
+
 
 </sb-layout-dashboard>

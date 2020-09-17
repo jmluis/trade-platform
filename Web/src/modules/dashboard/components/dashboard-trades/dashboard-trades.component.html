@@ -1,21 +1,7 @@
-<mat-button-toggle-group id="tradeToggle" #group="matButtonToggleGroup" value="buy">
-  <mat-button-toggle (change)="onValChange($event.value)" aria-hidden="true" value="buy">Buy</mat-button-toggle>
-  <mat-button-toggle (change)="onValChange($event.value)" aria-hidden="true" value="sell">Sell</mat-button-toggle>
-</mat-button-toggle-group>
-
-
-
-<form (submit)="$event.preventDefault()">
-  <mat-form-field appearance="fill">
-    <mat-label>Quantity</mat-label>
-    <input matInput #quantity>
-    <mat-hint *ngif="quantityAutoFilled">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Asking Price</mat-label>
-    <input matInput #price>
-    <mat-hint *ngif="priceAutoFilled">
-  </mat-form-field>
-</form>
-
-<button mat-raise-button>Submit</button>
+<div class="card-header">
+  <label for="quantity">Quantity:</label>
+  <input type="text" id="quantity" name="quantity"><br><br>
+  <label for="price">Price:</label>
+  <input type="number" id="price" name="price"><br><br>  
+  <button(click)="addTrade()">Submit</button>
+</div>

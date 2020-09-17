@@ -1,13 +1,17 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Trade } from '@modules/history/models'
+import { Injectable, PipeTransform } from '@angular/core';
+import { TRADES } from '@modules/history/data/trades';
+import { SortDirection } from '@modules/history/directives';
+import { Trade } from '@modules/history/models';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { debounceTime, delay, switchMap, tap } from 'rxjs/operators';
 
 interface State {
   page: number;
   pageSize: number;
-  searchTerm: string;
-  sortColumn: string;
+//  searchTerm: string;
+//  sortColumn: string;
 }
 
 
@@ -20,8 +24,8 @@ export class TradeService {
   private _state: State = {
     page: 1,
     pageSize: 4,
-    searchTerm: '',
-    sortColumn: '',
+//    searchTerm: '',
+//   sortColumn: '',
 };
 
   get trades$() {
@@ -46,22 +50,22 @@ export class TradeService {
   set pageSize(pageSize: number) {
       this._set({ pageSize });
   }
-  get searchTerm() {
-      return this._state.searchTerm;
-  }
-  set searchTerm(searchTerm: string) {
-      this._set({ searchTerm });
-  }
-  set sortColumn(sortColumn: string) {
-      this._set({ sortColumn });
-  }
+  // get searchTerm() {
+  //     return this._state.searchTerm;
+  // }
+  // set searchTerm(searchTerm: string) {
+  //     this._set({ searchTerm });
+  // }
+  // set sortColumn(sortColumn: string) {
+  //     this._set({ sortColumn });
+  // }
 
   private _set(patch: Partial<State>) {
     Object.assign(this._state, patch);
-    this._search$.next();
+    //this._search$.next();
   }
 
-  private _search$ = new Subject<void>();
+ // private _search$ = new Subject<void>();
 
   my_trades = [ ]
 

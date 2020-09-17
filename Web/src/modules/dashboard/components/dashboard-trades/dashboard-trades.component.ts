@@ -12,5 +12,9 @@ export class DashboardTradesComponent implements OnInit {
         console.log(value);
     }
 
+    addTrade(){
+        const quantity = parseFloat(( < HTMLInputElement > document.getElementById("quantity")).value);
+        const price = parseFloat(( < HTMLInputElement > document.getElementById("price")).value);
+    }
     ngOnInit() {}
 }

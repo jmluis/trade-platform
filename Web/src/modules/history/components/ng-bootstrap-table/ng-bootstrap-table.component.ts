@@ -42,7 +42,8 @@ export class NgBootstrapTableComponent implements OnInit {
     onSort({ column, direction }: SortEvent) {
         this.sortedColumn = column;
         this.sortedDirection = direction;
-        this.tradeService.sortColumn = column;
+        //this.tradeService.sortColumn = column;
         this.changeDetectorRef.detectChanges();
     }
 }
+
