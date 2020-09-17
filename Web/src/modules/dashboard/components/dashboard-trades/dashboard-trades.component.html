@@ -1,11 +1,9 @@
-
-
-
-
-<mat-button-toggle-group name="trade" id="tradeToggle" aria-label="Trade" value="buy">
-  <mat-button-toggle value="buy">Buy</mat-button-toggle>
-  <mat-button-toggle value="sell">Sell</mat-button-toggle>
+<mat-button-toggle-group id="tradeToggle" #group="matButtonToggleGroup" value="buy">
+  <mat-button-toggle (change)="onValChange($event.value)" aria-hidden="true" value="buy">Buy</mat-button-toggle>
+  <mat-button-toggle (change)="onValChange($event.value)" aria-hidden="true" value="sell">Sell</mat-button-toggle>
 </mat-button-toggle-group>
+
+
 
 <form (submit)="$event.preventDefault()">
   <mat-form-field appearance="fill">

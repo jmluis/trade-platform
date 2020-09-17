@@ -20,8 +20,8 @@ export const ROUTES: Routes = [
             title: 'Stock Trading Platform',
             breadcrumbs: [
                 {
-                    text: 'Buying Power ',
-                    active: true,
+                    text: 'Buying Power',
+                    active: false,
                 },
             ],
         } as SBRouteData,
@@ -31,7 +31,7 @@ export const ROUTES: Routes = [
     {
         path: '/stockdetails/',
         data: {
-            title: 'Dashboard Static - SB Admin Angular',
+            title: 'Stock Trading Platform',
             breadcrumbs: [
                 {
                     text: 'Dashboard',
@@ -49,7 +49,7 @@ export const ROUTES: Routes = [
     {
         path: 'light',
         data: {
-            title: 'Dashboard Light - SB Admin Angular',
+            title: 'Stock Trading Platform',
             breadcrumbs: [
                 {
                     text: 'Dashboard',
