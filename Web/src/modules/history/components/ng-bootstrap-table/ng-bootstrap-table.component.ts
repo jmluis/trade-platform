@@ -28,21 +28,15 @@ export class NgBootstrapTableComponent implements OnInit {
 
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
-    constructor(
-        public tradeService: TradeService,
-        private changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(public tradeService: TradeService, private changeDetectorRef: ChangeDetectorRef) {}
 
     ngOnInit() {
-        this.tradeService.pageSize = this.pageSize;
         this.trades$ = this.tradeService.trades$;
-        this.total$ = this.tradeService.total$;
     }
 
     onSort({ column, direction }: SortEvent) {
         this.sortedColumn = column;
         this.sortedDirection = direction;
-        this.tradeService.sortColumn = column;
         this.changeDetectorRef.detectChanges();
     }
 }

@@ -8,7 +8,7 @@ import { Stock } from '../models/stock.model';
 
 @Injectable({ providedIn: 'root' })
 export class StockService {
-    private readonly url = '/stock/';
+    private readonly url = '/api/stock/';
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _stock$ = new BehaviorSubject<Stock>({ name: '🎈' });
 
@@ -30,7 +30,7 @@ export class StockService {
     }
 
     fetchStock(symbol: string): Observable<any> {
-        return this.httpClient.get<any>(this.url).pipe(
+        return this.httpClient.get<any>(this.url + symbol).pipe(
             tap(response => {
                 this._stock$.next(response);
             })

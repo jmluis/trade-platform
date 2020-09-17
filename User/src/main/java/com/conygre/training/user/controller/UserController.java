@@ -3,8 +3,8 @@ package com.conygre.training.user.controller;
 import java.math.BigDecimal;
 
 import com.conygre.training.user.model.User;
-
 import com.conygre.training.user.service.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-import com.conygre.spring.SpringRESTApi.entities.Trade;
 
 /**
  * REST controller for the users microservice.
@@ -139,7 +138,7 @@ public class UserController {
 
 			userResponse.setBalance(newBalance);
 			userResponse.addTradeHistory(tradeId);
-			this.service.saveUser(accountResponse);
+			this.service.saveUser(userResponse);
 			return new ResponseEntity<Double>(userResponse.getBalance().doubleValue(), getNoCacheHeaders(), HttpStatus.OK);
 
 		} else {
