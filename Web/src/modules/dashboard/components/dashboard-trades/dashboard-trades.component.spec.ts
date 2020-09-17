@@ -14,8 +14,8 @@ import {
 
 /** @title Monitoring autofill state with AutofillMonitor */
 @Component({
-    selector: '',
-    templateUrl: ['./dashboard-trades.component.html'],
+    selector: 'dashboard-trades',
+    templateUrl: './dashboard-trades.component.html',
     styleUrls: ['./dashboard-trades.component.css']
 })
 export class DashboardTradesComponent implements AfterViewInit, OnDestroy {
@@ -24,10 +24,11 @@ export class DashboardTradesComponent implements AfterViewInit, OnDestroy {
     quantityAutofilled: boolean | undefined;
     priceAutofilled: boolean | undefined;
 
-    toggleOptions: Array<String> = ["Buy", "Sell"]
-    selectedValue: String[] = ["First"]
+    constructor() {}
 
-    constructor(private _autofill: AutofillMonitor) {}
+    onValChange(value: any){
+        console.log(value);
+    }
 
     ngAfterViewInit() {
         this._autofill

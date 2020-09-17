@@ -2,6 +2,7 @@ import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationService } from '@modules/navigation/services';
+import { NavigationServiceStub } from '@testing/stubs/navigation';
 
 import { SideNavComponent } from './side-nav.component';
 

@@ -1,8 +1,11 @@
-<mat-button-toggle-group [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=true>
-  <mat-button-toggle *ngFor="let item of toggleOptions;" [value]="item">{{item}}</mat-button-toggle>
-</mat-button-toggle-group>
 
-<div class="example-selected-value">Selected value: {{group.value}}</div>
+
+
+
+<mat-button-toggle-group name="trade" id="tradeToggle" aria-label="Trade" value="buy">
+  <mat-button-toggle value="buy">Buy</mat-button-toggle>
+  <mat-button-toggle value="sell">Sell</mat-button-toggle>
+</mat-button-toggle-group>
 
 <form (submit)="$event.preventDefault()">
   <mat-form-field appearance="fill">
