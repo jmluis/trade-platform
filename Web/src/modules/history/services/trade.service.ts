@@ -37,7 +37,6 @@ export class TradeService {
     fetchAllTrades() {
         return this.httpClient.get<any>(this.url).pipe(
             tap(response => {
-                console.log(response);
                 this._trades$.next(response);
             })
         );

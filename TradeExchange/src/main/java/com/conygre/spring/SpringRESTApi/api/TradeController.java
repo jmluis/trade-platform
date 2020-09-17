@@ -3,9 +3,11 @@ package com.conygre.spring.SpringRESTApi.api;
 import java.util.Collection;
 
 import com.conygre.spring.SpringRESTApi.Exceptions.ResourceNotFoundException;
+import com.conygre.spring.SpringRESTApi.entities.StockSymbol;
 import com.conygre.spring.SpringRESTApi.entities.Trade;
 import com.conygre.spring.SpringRESTApi.entities.TradeStatus;
 import com.conygre.spring.SpringRESTApi.service.TradeService;
+import com.conygre.spring.SpringRESTApi.service.TradeableService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +31,7 @@ public class TradeController {
         return svTrade.getAllTrades();
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/id/{id}")
     public Trade getTradeById(@PathVariable("id") String id) {
         return svTrade.getTradeById(id)
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
@@ -70,7 +72,7 @@ public class TradeController {
         svTrade.deleteTrade(trade);
     }
 
-    @DeleteMapping(value="/{id}")
+    @DeleteMapping(value="/id/{id}")
     public void deleteTradeById(@PathVariable("id") String id) {
         svTrade.getTradeById(id).orElseThrow(() -> new ResourceNotFoundException("Trade not found with id: " + id));
 

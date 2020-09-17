@@ -8,6 +8,9 @@ eureka:
         serviceUrl:
             defaultZone: http://localhost:3000/eureka/
 zuul:
+  ribbon:
+    eager-load:
+      enabled: true
   routes:
     user:
       path: /api/user/**

@@ -28,7 +28,6 @@ export class DashboardHistoryComponent implements OnInit {
             .fetchAllTrades()
             .pipe(takeUntil(this.destroyed$))
             .subscribe(trade => {
-                console.log(trade);
                 this.trade$.next(trade);
             });
     }
