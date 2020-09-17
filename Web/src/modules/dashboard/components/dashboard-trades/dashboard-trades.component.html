@@ -1,10 +1,8 @@
-<p>
-  dashboard-trades works!
-</p>
-<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-  <mat-button-toggle value="buy">Buy</mat-button-toggle>
-  <mat-button-toggle value="sell">Sell</mat-button-toggle>
+<mat-button-toggle-group [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=true>
+  <mat-button-toggle *ngFor="let item of toggleOptions;" [value]="item">{{item}}</mat-button-toggle>
 </mat-button-toggle-group>
+
+<div class="example-selected-value">Selected value: {{group.value}}</div>
 
 <form (submit)="$event.preventDefault()">
   <mat-form-field appearance="fill">

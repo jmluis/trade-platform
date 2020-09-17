@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Stock } from '@modules/dashboard/models/stock.model';
 import { StockService } from '@modules/dashboard/services/stock.service';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-dashboard',
@@ -9,17 +11,23 @@ import { StockService } from '@modules/dashboard/services/stock.service';
     styleUrls: ['dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-    currentStock: Stock = { name: '🎈' };
+    private destroyed$ = new Subject();
+    private stock$ = new BehaviorSubject<Stock>({ name: '🚀'});
     curStockTicker = 'AAPL';
 
-    constructor(private stockService: StockService) {
-
-    }
+    constructor(private stockService: StockService) { }
     ngOnInit() {
-        this.getStockData();
+        this.stockService
+            .fetchStock(this.curStockTicker)
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(stock => this.stock$.next(stock));
     }
 
-    getStockData() {
-        this.currentStock = this.stockService.fetchStock(this.curStockTicker);
+    getObservableStock(): Observable<Stock> {
+        return this.stock$.asObservable();
+    }
+
+    ngOnDestroy() {
+        // todo: destroy destroyed$
     }
 }

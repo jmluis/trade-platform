@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Stock } from '@modules/dashboard/models/stock.model';
 import { StockService } from '@modules/dashboard/services/stock.service';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard-charts',
@@ -11,6 +12,6 @@ import { StockService } from '@modules/dashboard/services/stock.service';
 export class DashboardChartsComponent implements OnInit {
     @Input() stock!: Stock;
 
-    constructor(private stockService: StockService) {}
+    constructor() {}
     ngOnInit() {}
 }

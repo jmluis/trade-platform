@@ -14,18 +14,18 @@ import {
 
 /** @title Monitoring autofill state with AutofillMonitor */
 @Component({
-    template: `
-        <sb-dashboard-trades
-            [someInput]="someInput"
-            (someFunction)="someFunction($event)"
-        ></sb-dashboard-trades>
-    `,
+    selector: '',
+    templateUrl: ['./dashboard-trades.component.html'],
+    styleUrls: ['./dashboard-trades.component.css']
 })
 export class DashboardTradesComponent implements AfterViewInit, OnDestroy {
     @ViewChild('quantity', { read: ViewContainerRef }) quantity: ElementRef<HTMLElement>;
     @ViewChild('price', { read: ViewContainerRef }) price: ElementRef<HTMLElement>;
     quantityAutofilled: boolean | undefined;
     priceAutofilled: boolean | undefined;
+
+    toggleOptions: Array<String> = ["Buy", "Sell"]
+    selectedValue: String[] = ["First"]
 
     constructor(private _autofill: AutofillMonitor) {}
 
