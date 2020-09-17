@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import {stocks} from '../../../../data/stocks';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -10,7 +11,6 @@ export class CardViewDetailsComponent implements OnInit {
     @Input() background!: string;
     @Input() color!: string;
     @Input() link = '';
-
     customClasses: string[] = [];
 
     constructor() {}

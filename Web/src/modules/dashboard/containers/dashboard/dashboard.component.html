@@ -1,1 +1,8 @@
-<sb-layout-dashboard><sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false"></sb-dashboard-head><sb-dashboard-cards></sb-dashboard-cards><sb-dashboard-charts></sb-dashboard-charts><sb-dashboard-history></sb-dashboard-history></sb-layout-dashboard>
+<sb-layout-dashboard>
+    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <sb-dashboard-cards [stock]="currentStock"></sb-dashboard-cards>
+    <sb-dashboard-charts [stock]="currentStock"></sb-dashboard-charts>
+    <sb-dashboard-history></sb-dashboard-history>
+
+</sb-layout-dashboard>

@@ -1,0 +1,22 @@
+<p>
+  dashboard-trades works!
+</p>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle value="buy">Buy</mat-button-toggle>
+  <mat-button-toggle value="sell">Sell</mat-button-toggle>
+</mat-button-toggle-group>
+
+<form (submit)="$event.preventDefault()">
+  <mat-form-field appearance="fill">
+    <mat-label>Quantity</mat-label>
+    <input matInput #quantity>
+    <mat-hint *ngif="quantityAutoFilled">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Asking Price</mat-label>
+    <input matInput #price>
+    <mat-hint *ngif="priceAutoFilled">
+  </mat-form-field>
+</form>
+
+<button mat-raise-button>Submit</button>

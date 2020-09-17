@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'sb-dashboard-cards',
@@ -7,6 +7,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['dashboard-cards.component.scss'],
 })
 export class DashboardCardsComponent implements OnInit {
+    @Input() stock!: string;
+    
     constructor() {}
     ngOnInit() {}
 }

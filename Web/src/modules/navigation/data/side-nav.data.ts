@@ -2,15 +2,15 @@ import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 
 export const sideNavSections: SideNavSection[] = [
     {
-        text: 'CORE',
+        text: 'Main Page',
         items: ['dashboard'],
     },
     {
-        text: 'INTERFACE',
+        text: 'Investing',
         items: ['layouts', 'pages'],
     },
     {
-        text: 'My Trades',
+        text: 'My Trade History',
         items: ['history'],
     },
 ];
@@ -18,60 +18,42 @@ export const sideNavSections: SideNavSection[] = [
 export const sideNavItems: SideNavItems = {
     dashboard: {
         icon: 'tachometer-alt',
-        text: 'Dashboard',
+        text: 'Portfolio',
         link: '/dashboard',
     },
     layouts: {
         icon: 'columns',
-        text: 'Layouts',
+        text: 'Sell Orders',
         submenu: [
             {
-                text: 'Static Navigation',
+                text: 'Processing Orders',
                 link: '/dashboard/static',
             },
             {
-                text: 'Light Sidenav',
+                text: 'Filled Orders',
+                link: '/dashboard/light',
+            },
+            {
+                text: 'Rejected Orders',
                 link: '/dashboard/light',
             },
         ],
     },
     pages: {
         icon: 'book-open',
-        text: 'Pages',
+        text: 'Buy Orders',
         submenu: [
             {
-                text: 'Authentication',
-                submenu: [
-                    {
-                        text: 'Login',
-                        link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
-                    },
-                ],
+                text: 'Processing Orders',
+                link: '/dashboard/static',
             },
             {
-                text: 'Error',
-                submenu: [
-                    {
-                        text: '401 Page',
-                        link: '/error/401',
-                    },
-                    {
-                        text: '404 Page',
-                        link: '/error/404',
-                    },
-                    {
-                        text: '500 Page',
-                        link: '/error/500',
-                    },
-                ],
+                text: 'Filled Orders',
+                link: '/dashboard/light',
+            },
+            {
+                text: 'Rejected Orders',
+                link: '/dashboard/light',
             },
         ],
     },

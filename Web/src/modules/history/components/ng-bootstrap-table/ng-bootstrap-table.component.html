@@ -1,12 +1,13 @@
 <form>
-    <h1>is this where we want to be?</h1>
-    <div class="form-group form-inline">Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="tradeService.searchTerm" /><span class="ml-3" *ngIf="tradeService.loading$ | async">Loading...</span></div>
+    <h1>Trade History</h1>
+    <div class="form-group form-inline">Trade Lookup: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="tradeService.searchTerm" /><span class="ml-3" *ngIf="tradeService.loading$ | async">Loading...</span></div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>ticker</span><sb-sort-icon *ngIf='sortedColumn === "stockTicker"'></sb-sort-icon></th>
-                <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>price</span><sb-sort-icon *ngIf='sortedColumn === "price"'></sb-sort-icon></th>
+                <th scope="col">Trade ID</th>
+    
+                <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Ticker</span><sb-sort-icon *ngIf='sortedColumn === "stockTicker"'></sb-sort-icon></th>
+                <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>Price</span><sb-sort-icon *ngIf='sortedColumn === "price"'></sb-sort-icon></th>
             </tr>
         </thead>
         <tbody>

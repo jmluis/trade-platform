@@ -20,7 +20,7 @@ export const ROUTES: Routes = [
             title: 'Stock Trading Platform',
             breadcrumbs: [
                 {
-                    text: 'Dashboard',
+                    text: 'Buying Power ',
                     active: true,
                 },
             ],
@@ -64,10 +64,7 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: dashboardContainers.LightComponent,
     },
-    {
-        path: ':stockId',
-        
-    },
+
 ];
 
 @NgModule({

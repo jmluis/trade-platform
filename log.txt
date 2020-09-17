@@ -1,0 +1,4 @@
+
+<li class="nav-item dropdown dropdown-user no-caret" *ngIf="userService.user$ | async as user" ngbDropdown placement="bottom-right" display="dynamic">
+Removed
+*ngIf="userService.user$ | async as user"
