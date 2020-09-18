@@ -13,9 +13,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardHistoryComponent implements OnInit {
     @Input() stock!: Observable<Stock>;
-
-    private destroyed$ = new Subject();
     private trade$ = new BehaviorSubject<Trade[]>([]);
+    private _stock!: Stock;
 
     getTrades(): Observable<Trade[]> {
         return this.trade$.asObservable();
@@ -24,14 +23,14 @@ export class DashboardHistoryComponent implements OnInit {
     constructor(private tradeService: TradeService) {}
 
     ngOnInit() {
-        console.log("initializing dashboard history comp1")
-        this.tradeService
-            .fetchAllTrades()
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe(trade => {
-                console.log('??')
-                console.log(trade)
-                this.trade$.next(trade);
-            });
+        this.stock.subscribe(stock => {
+            this._stock = stock;
+            this.tradeService
+                .fetchTradesByTicker(this._stock.companySymbol)
+                .pipe()
+                .subscribe(trades => {
+                    this.trade$.next(trades);
+                });
+        });
     }
 }

@@ -4,6 +4,6 @@
         ><div><a></a></div></sb-card
     ><sb-card
         ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "table"]'></fa-icon>User Trade History</div>
-        <div class="card-body"><sb-ng-bootstrap-table [pageSize]="6"></sb-ng-bootstrap-table></div></sb-card
+        <div class="card-body"><sb-ng-bootstrap-table [trades$]='getTrades()' [pageSize]="6"></sb-ng-bootstrap-table></div></sb-card
 ></sb-layout-dashboard>
 

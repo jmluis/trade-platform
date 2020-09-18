@@ -1,5 +1,10 @@
 <div class="row">
     <div class="col-xl-3 col-md-6" *ngFor="let stock of getStockList$() | async">
-        <sb-card-view-details (clicked)="handleClick(stock)" [background]="getBackground(stock)"><div class="card-body">{{stock.companySymbol}}</div></sb-card-view-details>
+        <sb-card-view-details (clicked)="handleClick(stock)" [background]="getBackground(stock)">
+            <div class="card-body">
+                {{stock.companyName}} <br />
+                {{stock.stockIndex}} > {{stock.companySymbol}}
+            </div>
+        </sb-card-view-details>
     </div>
 </div>

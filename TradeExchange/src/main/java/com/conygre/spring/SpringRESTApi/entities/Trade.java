@@ -16,7 +16,7 @@ public class Trade {
     @Id
     private String id;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date creationDate;
+    private Date creationDate = new Date();
     private StockSymbol stock;
     private int stockQuantity;
     private double requestPrice;
@@ -52,7 +52,7 @@ public class Trade {
         this.creationDate = creationDate;
     }
 
-    public StockSymbol getStockTicker() {
+    public StockSymbol getStock() {
         return stock;
     }
 
@@ -94,6 +94,6 @@ public class Trade {
 
     @Override
     public String toString() {
-        return String.format("%s\t%s\t%s", this.getStockTicker(), this.getStatus(), this.getAction());
+        return String.format("%s\t%s\t%s", this.getStock(), this.getStatus(), this.getAction());
    }
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Trade } from '@modules/history/models';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class TradeService {
@@ -21,22 +22,17 @@ export class TradeService {
 
     createBuyOrder(trade: Trade) {
         return this.httpClient.post<Trade>(this.url, trade).pipe(
-            tap(response=> {
-                console.log('we heard back!')
-                console.log(response)
-            })
+            tap(response=> {}), 
+            catchError(this.handleError<any>('Error Adding Trade'))
         );
     }
-
-    createSellOrder() {
-        console.log('smiley 😄');
-    }
-
+    
     fetchAllTrades() {
         return this.httpClient.get<Trade[]>(this.url).pipe(
             tap(response => {
                 this._trades$.next(response);
-            })
+            }), 
+            catchError(this.handleError<any>('fetchAllTrades'))
         );
     }
 
@@ -44,7 +40,8 @@ export class TradeService {
         return this.httpClient.get<Trade[]>(this.url + 'ticker/' + stock).pipe(
             tap(response => {
                 this._trades$.next(response);
-            })
+            }),
+            catchError(this.handleError<any>('fetchTradesByTicker'))
         );
     }
 
@@ -52,7 +49,8 @@ export class TradeService {
         return this.httpClient.get<Trade[]>(this.url + 'status/' + status).pipe(
             tap(response => {
                 this._trades$.next(response);
-            })
+            }),
+            catchError(this.handleError<any>('fetchTradesByStatus'))
         );
     }
 
@@ -60,7 +58,19 @@ export class TradeService {
         return this.httpClient.get<any>(this.url + id).pipe(
             tap(response => {
                 this._trades$.next(response);
-            })
+            }),
+            catchError(this.handleError<any>('fetchTradeById'))
         );
+    }
+
+
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            // TODO: send the error to remote logging infrastructure
+            console.log(error);
+
+            // Let the app keep running by returning an empty result.
+            return of(result as T);
+        };
     }
 }

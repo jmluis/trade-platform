@@ -1,34 +1,30 @@
 <div class="row">
-  <div class="col-xxl-3 col-md-6">
-    <sb-card
-            ><div class="card-header"><fa-icon class="mr-1" [icon]='["fas", "chart-area"]'></fa-icon>{{stock.name}}</div>
-            <div class="card-body"><sb-charts-area></sb-charts-area></div
-    ></sb-card>
-  </div>
-  <div class="column"></div>
-
-    <div class="col-xl-3 col-md-6">
+<div class="col-xxl-3 col-md-6">
+  <sb-card
+          ><div class="card-header"></div>
+          <div class="card-body"><sb-charts-area [stock]="this.stock"></sb-charts-area></div
+  ></sb-card>
+</div>
+  <div class="col-xl-3 col-md-6">
     <sb-card-view-details link="/dashboard" background="bg-primary"><div class="card-body">Buy</div></sb-card-view-details>
 
-    <div class="card-header">
-        <label for="quantity">Quantity:</label>
-        <input type="text" id="quantity" name="quantity" [(ngModel)]="_stockQuantity"><br><br>
-        <label for="price">Price: </label>
-        <input type="number" id="price" name="price" [(ngModel)]="_requestPrice"><br><br>
-      <button (click)="addTrade('BID')">Bid</button>
-      <button (click)="addTrade('ASK')">Ask</button>
-    </div>
-
-    </div>
-
-
-    <div class="col-xl-3 col-md-6">
-        <sb-card-view-details link="/dashboard" background="bg-primary"><div class="card-body">Sell</div></sb-card-view-details>
-
-
+    <div class="card-header ">
     
-
+        <label for="bidQuantity">Quantity:</label>
+        <input type="text" id="bidQuantity" name="bidQuantity" [(ngModel)]="_bidStockQuantity"><br><br>
+        <label for="price">Bidding Price: </label>
+        <input type="number" id="price" name="price" [(ngModel)]="_bidRequestPrice"><br><br>
+      <button (click)="bidTrade()">Submit</button>
     </div>
-
-
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <sb-card-view-details link="/dashboard" background="bg-primary"><div class="card-body">Sell</div></sb-card-view-details>
+    <div class="card-header">
+      <label for="askQuantity">Quantity:</label>
+      <input type="text" id="askQuantity" name="askQuantity" [(ngModel)]="_askStockQuantity"><br><br>
+      <label for="price">Asking Price: </label>
+      <input type="number" id="price" name="price" [(ngModel)]="_askRequestPrice"><br><br>
+      <button (click)="askTrade('ask')">Submit</button>
+    </div>
+  </div>
 </div>

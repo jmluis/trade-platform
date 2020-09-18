@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Stock } from '@modules/dashboard/models/stock.model';
+import { Stock } from '@modules/dashboard/models';
 import { StockService } from '@modules/dashboard/services/stock.service';
 import { Trade } from '@modules/history/models';
 import { TradeService } from '@modules/history/services';
@@ -15,9 +15,10 @@ export class DashboardChartsComponent implements OnInit {
     @Input() stock!: Observable<Stock>;
 
     private _stock!: Stock;
-    private _isAsk = true;
-    private _stockQuantity = 0;
-    private _requestPrice = 0.0;
+    private _askStockQuantity = 0;
+    private _askRequestPrice = 0.0;
+    private _bidStockQuantity = 0;
+    private _bidRequestPrice = 0.0;
 
     constructor(private tradeService: TradeService) {}
     ngOnInit() {
@@ -30,17 +31,25 @@ export class DashboardChartsComponent implements OnInit {
         console.log(value);
     }
 
-    addTrade(bronzeAction: string) {
-        /// TODO: remove this \/
-        console.log(this._stock)
-        this._isAsk = bronzeAction === 'ASK';
+    askTrade() {
         const obj: Trade = {
             stock: this._stock,
-            stockQuantity: this._stockQuantity, 
-            requestPrice: this._requestPrice,
-            action: this._isAsk ? 'ASK' : 'BID',
+            stockQuantity: this._askStockQuantity, 
+            requestPrice: this._askRequestPrice,
+            action: 'ASK',
         };
-        console.log(obj)
+        this.tradeService.createBuyOrder(obj).subscribe(response => {
+            /// TODO: check for exceptions
+        });
+    }
+
+    bidTrade() {
+        const obj: Trade = {
+            stock: this._stock,
+            stockQuantity: this._bidStockQuantity, 
+            requestPrice: this._bidRequestPrice,
+            action: 'BID',
+        };
         this.tradeService.createBuyOrder(obj).subscribe(response => {
             /// TODO: check for exceptions
         });

@@ -3,11 +3,9 @@ package com.conygre.spring.SpringRESTApi.api;
 import java.util.Collection;
 
 import com.conygre.spring.SpringRESTApi.Exceptions.ResourceNotFoundException;
-import com.conygre.spring.SpringRESTApi.entities.StockSymbol;
 import com.conygre.spring.SpringRESTApi.entities.Trade;
 import com.conygre.spring.SpringRESTApi.entities.TradeStatus;
 import com.conygre.spring.SpringRESTApi.service.TradeService;
-import com.conygre.spring.SpringRESTApi.service.TradeableService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,8 +35,8 @@ public class TradeController {
             .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
     }
 
-    @GetMapping(value = "/ticker/{stockTicker}")
-    public Collection<Trade> getAllTradesByStockTicker(@PathVariable("stockTicker") String stockTicker){
+    @GetMapping(value = "/ticker/{ticker}")
+    public Collection<Trade> getAllTradesByStockTicker(@PathVariable("ticker") String stockTicker){
         return svTrade.getAllTradesByStockTicker(stockTicker)
             .orElseThrow(() -> new ResourceNotFoundException("Trades not found with stock ticker: " + stockTicker));
     }
@@ -52,7 +50,11 @@ public class TradeController {
     /// POST
     @PostMapping()
     public void addTrade(@RequestBody Trade trade) {
-        svTrade.addTrade(trade);
+        try {
+            svTrade.addTrade(trade);
+        } catch(Exception e) {
+            throw new ResourceNotFoundException("Unable to add new Trade");
+        }
     }
 
     /// PUT

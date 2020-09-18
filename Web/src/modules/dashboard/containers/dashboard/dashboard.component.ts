@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
             .fetchTradeables()
             .pipe()
             .subscribe(stockList => {
-                console.log(stockList)
                 this.stock$.next(stockList[0]);
                 this.tradeableStocks$.next(stockList);
             });
@@ -42,5 +41,9 @@ export class DashboardComponent implements OnInit {
 
     ngOnDestroy() {
         // todo: destroy destroyed$
+    }
+
+    handleCard(stockClicked: Stock) {
+        this.stock$.next(stockClicked)
     }
 }

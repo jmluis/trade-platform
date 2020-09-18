@@ -15,6 +15,6 @@ public interface TradeRepository extends MongoRepository<Trade, ObjectId>
     //Ask about this
     public Optional<Collection<Trade>> findByStatus(TradeStatus status);
 
-    @Query("{'trade': ?0}")
+    @Query(value="{'stock.companySymbol': ?0  }", sort = "{ creationDate : -1 }")
     public Optional<Collection<Trade>> customFindByStockTicker(String StockTicker);
 }
