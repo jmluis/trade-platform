@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Stock } from '@modules/dashboard/models';
-import { StockService } from '@modules/dashboard/services';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
     selector: 'sb-dashboard-cards',
@@ -12,23 +10,38 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardCardsComponent implements OnInit {
     private destroyed$ = new Subject();
+    @Input() stockList!: Observable<Stock[]>;
+    @Input() currentStock!: Observable<Stock>;
+    @Output() clickedCard = new EventEmitter<Stock>();
 
-
-
-    private stock$ = new BehaviorSubject<Stock[]>([]);
-
-    
-    @Input() stock!: string;
-
-    constructor(private stockService: StockService) {}
-    ngOnInit() {
-        this.stockService
-            .fetchTradeables()
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe(tradeables => {
-                this.stock$.next(tradeables);
-            })
+    getStockList$() {
+        return this.stockList;
     }
 
-    onSubmit() {}
+    private _stocks!: Stock[];
+    private _stock!: Stock;
+
+    constructor() {}
+    ngOnInit() {
+        this.stockList.subscribe(stonks => {
+            this._stocks = stonks;
+        });
+        this.currentStock.subscribe(stock => {
+            this._stock = stock;
+        })
+    }
+
+    getBackground(stk: Stock) {
+        if (this._stock === undefined)
+            return 'bg-primary';
+        if (stk.companySymbol === this._stock.companySymbol)
+            return 'bg-primary';
+        else
+            return 'bg-secondary';
+    }
+
+    handleClick(stk: Stock) {
+        this.clickedCard.emit(stk);
+        this._stock = stk;
+    }
 }

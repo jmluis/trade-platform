@@ -4,16 +4,9 @@ import { Trade } from '@modules/history/models';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-interface State {
-    page: number;
-    pageSize: number;
-    searchTerm: string;
-    sortColumn: string;
-}
-
 @Injectable({ providedIn: 'root' })
 export class TradeService {
-    private readonly url = 'http://localhost/api/trade/';
+    private readonly url = '/api/trade/';
     private _loading$ = new BehaviorSubject<boolean>(true);
     private _trades$ = new BehaviorSubject<Trade[]>([]);
 
@@ -26,8 +19,13 @@ export class TradeService {
 
     constructor(private httpClient: HttpClient) {}
 
-    createBuyOrder() {
-        console.log('smiley 😄');
+    createBuyOrder(trade: Trade) {
+        return this.httpClient.post<Trade>(this.url, trade).pipe(
+            tap(response=> {
+                console.log('we heard back!')
+                console.log(response)
+            })
+        );
     }
 
     createSellOrder() {
@@ -35,7 +33,7 @@ export class TradeService {
     }
 
     fetchAllTrades() {
-        return this.httpClient.get<any>(this.url).pipe(
+        return this.httpClient.get<Trade[]>(this.url).pipe(
             tap(response => {
                 this._trades$.next(response);
             })
@@ -43,7 +41,7 @@ export class TradeService {
     }
 
     fetchTradesByTicker(stock: string) {
-        return this.httpClient.get<any>(this.url + 'ticker/' + stock).pipe(
+        return this.httpClient.get<Trade[]>(this.url + 'ticker/' + stock).pipe(
             tap(response => {
                 this._trades$.next(response);
             })
@@ -51,7 +49,7 @@ export class TradeService {
     }
 
     fetchTradesByStatus(status: string) {
-        return this.httpClient.get<any>(this.url + 'status/' + status).pipe(
+        return this.httpClient.get<Trade[]>(this.url + 'status/' + status).pipe(
             tap(response => {
                 this._trades$.next(response);
             })

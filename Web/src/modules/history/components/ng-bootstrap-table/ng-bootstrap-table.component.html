@@ -1,28 +1,35 @@
 <form>
 <h1>Trade History</h1>
-<div class="form-group form-inline">Trade Lookup: <input class="form-control ml-2" type="text" /><span class="ml-3" *ngIf="tradeService.loading$ | async"></span></div>
+<div class="form-group form-inline">                 
+    <!-- <input class="form-control ml-2" type="text" /><span class="ml-3" *ngIf="tradeService.loading$ | async"></span> -->
+</div>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Trade ID</th>
-            
-            <th scope="col" sbSortable="name" (sort)="onSort($event)"><span>Ticker</span></th>
-            <th scope="col" sbSortable="price" (sort)="onSort($event)"><span>Price</span></th>
+            <th scope="col">Date/Time</th>
+            <th scope="col"><span>Ticker</span></th>
+            <th scope="col"><span>Quantity</span></th>
+            <th scope="col"><span>Price</span></th>
+            <th scope="col"><span>Action</span></th>
+            <th scope="col"><span>Status</span></th>
             
         </tr>
     </thead>
 
-    <!-- <tbody>
-        <tr *ngFor="let trade of trades$ | async">
-            <th scope="row">{{ trade.id }}</th>
-            
-            <td><ngb-highlight [result]="trade.name" [term]="tradeService.searchTerm"></ngb-highlight></td>
-            <td><ngb-highlight [result]="trade.price | number" [term]="tradeService.searchTerm"></ngb-highlight></td>          
+    <tbody>
+        <tr *ngFor="let trade of getTrades$() | async">
+            <th scope="row">{{ trade.creationDate | date:'medium' }}</th>
+            <th scope="row">{{ trade.stock.companySymbol }}</th>
+            <th scope="row">{{ trade.stockQuantity }}</th>
+            <th scope="row">{{ trade.requestPrice }}</th>
+            <th scope="row">{{ trade.action }}</th>
+            <th scope="row">{{ trade.status }}</th>
+
         </tr>
-    </tbody> -->
+    </tbody>
 
 </table>
-<div class="d-flex justify-content-between p-2">
+<!-- <div class="d-flex justify-content-between p-2">
     <ngb-pagination [collectionSize]="total$ | async" [(page)]="tradeService.page" [pageSize]="tradeService.pageSize"></ngb-pagination
     ><select class="custom-select" style="width: auto;" name="pageSize" [(ngModel)]="tradeService.pageSize"
         ><option [ngValue]="2">2 items per page</option
@@ -30,6 +37,6 @@
         ><option [ngValue]="6">6 items per page</option></select
     >
 </div>
-</form>
+</form> -->
 
 

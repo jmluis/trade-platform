@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import {stocks} from '../../../../data/stocks';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'sb-card-view-details',
@@ -10,7 +9,8 @@ import {stocks} from '../../../../data/stocks';
 export class CardViewDetailsComponent implements OnInit {
     @Input() background!: string;
     @Input() color!: string;
-    @Input() link = '';
+    @Output() clicked = new EventEmitter<boolean>(false);
+
     customClasses: string[] = [];
 
     constructor() {}
@@ -21,5 +21,9 @@ export class CardViewDetailsComponent implements OnInit {
         if (this.color) {
             this.customClasses.push(this.color);
         }
+    }
+
+    doClick() {
+        this.clicked.emit(true);
     }
 }

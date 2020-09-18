@@ -20,19 +20,21 @@ import { Observable } from 'rxjs';
 })
 export class NgBootstrapTableComponent implements OnInit {
     @Input() pageSize = 4;
+    @Input() trades$!: Observable<Trade[]>;
 
-    trades$!: Observable<Trade[]>;
     total$!: Observable<number>;
     sortedColumn!: string;
     sortedDirection!: string;
 
     @ViewChildren(SBSortableHeaderDirective) headers!: QueryList<SBSortableHeaderDirective>;
 
-    constructor(public tradeService: TradeService, private changeDetectorRef: ChangeDetectorRef) {}
-
-    ngOnInit() {
-        this.trades$ = this.tradeService.trades$;
+    getTrades$() {
+        return this.trades$;
     }
+    
+    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+
+    ngOnInit() {}
 
     onSort({ column, direction }: SortEvent) {
         this.sortedColumn = column;

@@ -1,13 +1,13 @@
-// TODO: double check interface
+import { Stock } from '@modules/dashboard/models';
 
 export interface Trade {
-    [key: string]: string | number | Date | undefined;
+    [key: string]: string | number | Date | Stock | undefined;
     _id?: string;
-    quantity: number;
-    price: number;
-    status: string;
+    stockQuantity: number;
+    requestPrice: number;
+    status?: string;
     action: string;
-    stockTicker: string;
+    stock: Stock;
     // @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    tradeDate?: Date;
+    creationDate?: Date;
 }

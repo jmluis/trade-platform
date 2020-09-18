@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TradeService } from '@modules/history/services';
 
 @Component({
     selector: 'app-dashboard-trades',
@@ -6,15 +7,14 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./dashboard-trades.component.scss'],
 })
 export class DashboardTradesComponent implements OnInit {
-    constructor() {}
+    constructor(private tradeService: TradeService) {}
 
     onValChange(value: any) {
         console.log(value);
     }
 
     addTrade(){
-        const quantity = parseFloat(( < HTMLInputElement > document.getElementById("quantity")).value);
-        const price = parseFloat(( < HTMLInputElement > document.getElementById("price")).value);
+        /// see: \Web\src\modules\dashboard\components\dashboard-charts\dashboard-charts.component.ts
     }
     ngOnInit() {}
 }

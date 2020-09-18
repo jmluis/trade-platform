@@ -3,5 +3,5 @@ export interface Stock {
     _id?: string;
     companyName: string;
     companySymbol: string;
-    stockIndex: string;
+    //stockIndex: string;
 }

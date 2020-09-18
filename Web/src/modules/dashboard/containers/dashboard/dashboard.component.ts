@@ -12,6 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
     private destroyed$ = new Subject();
+    private tradeableStocks$ = new BehaviorSubject<Stock[]>([]);
     private stock$ = new BehaviorSubject<Stock>({ companyName: '🚀', stockIndex: 'NASDAQ', companySymbol: 'TSLA'});
     curStockTicker = 'AAPL';
 
@@ -21,10 +22,22 @@ export class DashboardComponent implements OnInit {
             .fetchStock(this.curStockTicker)
             .pipe(takeUntil(this.destroyed$))
             .subscribe(stock => this.stock$.next(stock));
+        this.stockService
+            .fetchTradeables()
+            .pipe()
+            .subscribe(stockList => {
+                console.log(stockList)
+                this.stock$.next(stockList[0]);
+                this.tradeableStocks$.next(stockList);
+            });
     }
 
     getObservableStock(): Observable<Stock> {
         return this.stock$.asObservable();
+    }
+
+    getObservableList(): Observable<Stock[]> {
+        return this.tradeableStocks$.asObservable();
     }
 
     ngOnDestroy() {

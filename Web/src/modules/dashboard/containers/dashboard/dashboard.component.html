@@ -1,14 +1,12 @@
 <sb-layout-dashboard>
-    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="true"></sb-dashboard-head>
+    <sb-dashboard-head title="Dashboard" [hideBreadcrumbs]="false">Buying Power</sb-dashboard-head>
 
-    <div *ngIf="this.getObservableStock() | async as _stock">
-        <sb-dashboard-cards [stock]="_stock"></sb-dashboard-cards>
-        <sb-dashboard-charts [stock]="_stock"></sb-dashboard-charts>
+        <sb-dashboard-cards [stockList]="getObservableList()" [currentStock]="this.getObservableStock()"></sb-dashboard-cards>
+        <sb-dashboard-charts [stock]="this.getObservableStock()"></sb-dashboard-charts>
         <sb-dashboard-history></sb-dashboard-history>
-    </div>
-
-        <sb-dashboard-charts [stock]="_stock"></sb-dashboard-charts>
-        <sb-dashboard-history></sb-dashboard-history>
+        <!-- <h4>???</h4>
+        <sb-dashboard-charts [stock]="this.getObservableStock()"></sb-dashboard-charts>
+        <sb-dashboard-history [stock]="this.getObservableStock()"></sb-dashboard-history> -->
 
 
 </sb-layout-dashboard>
