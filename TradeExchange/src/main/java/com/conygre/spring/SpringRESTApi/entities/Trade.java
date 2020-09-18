@@ -17,16 +17,16 @@ public class Trade {
     private String id;
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date creationDate;
-    private String stockTicker;
+    private StockSymbol stock;
     private int stockQuantity;
     private double requestPrice;
     private TradeStatus status = TradeStatus.CREATED;
 
     private TradeAction action;
 
-    public Trade(Date creationDate, String stockTicker, int stockQuantity, double requestPrice, TradeAction action) {
+    public Trade(Date creationDate, StockSymbol stock, int stockQuantity, double requestPrice, TradeAction action) {
         this.creationDate = creationDate;
-        this.stockTicker = stockTicker;
+        this.stock = stock;
         this.stockQuantity = stockQuantity;
         this.requestPrice = requestPrice;
         this.action = action;
@@ -52,12 +52,12 @@ public class Trade {
         this.creationDate = creationDate;
     }
 
-    public String getStockTicker() {
-        return stockTicker;
+    public StockSymbol getStockTicker() {
+        return stock;
     }
 
-    public void setStockTicker(String stockTicker) {
-        this.stockTicker = stockTicker;
+    public void setStock(StockSymbol stock) {
+        this.stock = stock;
     }
 
     public int getStockQuantity() {
