@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
     private destroyed$ = new Subject();
-    private stock$ = new BehaviorSubject<Stock>({ name: '🚀'});
+    private stock$ = new BehaviorSubject<Stock>({ companyName: '🚀', stockIndex: 'NASDAQ', companySymbol: 'TSLA'});
     curStockTicker = 'AAPL';
 
     constructor(private stockService: StockService) { }

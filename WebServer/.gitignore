@@ -5,9 +5,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-*.class
-**/bin/**
-
 ### STS ###
 .apt_generated
 .classpath
@@ -25,7 +22,6 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-**/src/main/**/static/
 
 ### NetBeans ###
 /nbproject/private/
@@ -36,6 +32,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-/node_modules/
-*.log

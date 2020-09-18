@@ -41,7 +41,7 @@ public class User implements Serializable {
         this.tradeHistory = tradeHistory;
     }
     public void addTradeHistory(String tradeId){
-        this.tradeHistory.append(tradeId);
+        this.tradeHistory.add(tradeId);
     }
 
     public BigDecimal getBalance() {
