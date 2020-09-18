@@ -1,5 +1,7 @@
 export interface Stock {
     [key: string]: string | undefined;
     _id?: string;
-    name: string;
+    companyName: string;
+    companySymbol: string;
+    stockIndex: string;
 }

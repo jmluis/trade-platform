@@ -1,4 +1,5 @@
 <div class="row">
+<<<<<<< HEAD
     <div class="col-xl-3 col-md-6">
         <sb-card-view-details link="/dashboard" background="bg-secondary"><div class="card-body">AAPL</div></sb-card-view-details>
     </div>
@@ -10,5 +11,9 @@
     </div>
     <div class="col-xl-3 col-md-6">
         <sb-card-view-details link="/dashboard" background="bg-secondary"><div class="card-body">SPY</div></sb-card-view-details>
+=======
+    <div class="col-xl-3 col-md-6" *ngFor="let stock of (stock$ | async)">
+        <sb-card-view-details link="/dashboard" background="bg-primary"><div class="card-body">{{stock.companySymbol}}</div></sb-card-view-details>
+>>>>>>> 266f9e7b1b7e7ff8d97701e8ac709ccd7b8b49fa
     </div>
 </div>

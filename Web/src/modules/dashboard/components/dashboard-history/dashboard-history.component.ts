@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Trade } from '@modules/history/models';
+import { TradeService } from '@modules/history/services';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'sb-dashboard-history',
@@ -7,6 +11,24 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
     styleUrls: ['dashboard-history.component.scss'],
 })
 export class DashboardHistoryComponent implements OnInit {
-    constructor() {}
-    ngOnInit() {}
+    private destroyed$ = new Subject();
+    private trade$ = new BehaviorSubject<Trade[]>([
+        {
+            action: 'SELL',
+            price: 1,
+            quantity: 1,
+            status: 'CREATED',
+            stockTicker: 'C',
+        },
+    ]);
+    constructor(private tradeService: TradeService) {}
+
+    ngOnInit() {
+        this.tradeService
+            .fetchAllTrades()
+            .pipe(takeUntil(this.destroyed$))
+            .subscribe(trade => {
+                this.trade$.next(trade);
+            });
+    }
 }
