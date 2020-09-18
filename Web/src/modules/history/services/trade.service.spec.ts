@@ -15,7 +15,7 @@ describe('TradeService', () => {
 
   describe('trades$', () => {
     it('should return Observable<Trade[]>', () => {
-        tradeService.trades().subscribe((response: any) => {
+        tradeService.trades$().subscribe((response: any) => {
           expect(response).toBeDefined();
         });
     });

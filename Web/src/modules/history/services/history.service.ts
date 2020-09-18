@@ -5,8 +5,8 @@ import { Observable, of } from 'rxjs';
     providedIn: 'root',
 })
 export class HistoryService {
-    constructor() {}
-    getHistory$(): Observable<{}> {
-        return of({});
+    static getHistory$() {
+      throw new Error('Method not implemented.');
+    }
     }
 }

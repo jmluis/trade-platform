@@ -1,6 +1,6 @@
 // TODO: double check interface
 export interface Trade {
-    [key: string]: string | number | Date | undefined;
+    [key: string]: string | number | Date;
     id: string;
     quantity: number;
     price: number;

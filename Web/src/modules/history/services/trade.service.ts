@@ -20,6 +20,8 @@ export class TradeService {
   private _loading$ = new BehaviorSubject<boolean>(true);
   private _trades$ = new BehaviorSubject<Trade[]>([]);
   private _total$ = new BehaviorSubject<number>(0);
+  private readonly url = '/trade/';
+
 
   private _state: State = {
     page: 1,
@@ -27,6 +29,7 @@ export class TradeService {
 //    searchTerm: '',
 //   sortColumn: '',
 };
+
 
   get trades$() {
     return this._trades$.asObservable();
@@ -78,7 +81,11 @@ export class TradeService {
   }
 
   createBuyOrder() {
-    console.log('smiley 😄')
+    return this.http.get<any>(this.url).pipe(
+      tap(response => {
+          this._trades$.next(response);
+      })
+  );
   }
 
   createSellOrder() {
